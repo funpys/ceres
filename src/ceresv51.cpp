@@ -818,7 +818,7 @@ Rcpp::List fit_ceres(NumericMatrix & rD,
 
 	// Set random seed
 	std::default_random_engine generator;
-	generator.seed(1);
+	generator.seed(time(NULL));
 	//
 	// Define number of genes, loci, cell lines
 	int NGENES = rG.nrow();

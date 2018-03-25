@@ -42,9 +42,13 @@ run_ceres <- function(sg_data, cn_data, guide_locus, locus_gene,
             replicate_map_is_data_frame)
 
   #
-  cn_data <- cn_data[, unique(replicate_map$CellLine), drop=F]
-  sg_data <- sg_data[, unique(replicate_map$Replicate), drop=F]
 
+  cn_data <- cn_data[, unique(replicate_map$CellLine), drop=F]
+  if(ncol(sg_data)==1){
+    cat("single cell line witout replicates")
+  } else {
+  sg_data <- sg_data[, unique(replicate_map$Replicate), drop=F]
+  }
   # Make sure that sgRNA and CN matrix columns are in the right order and contain same number of cell lines
   replicates_match_columns <- all(replicate_map$Replicate == colnames(sg_data))
   stopifnot(replicates_match_columns)
